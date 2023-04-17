@@ -35,7 +35,7 @@ export default function Home() {
 
   const params = {
     page: 1,
-    page_size: 3,
+    page_size: 9,
     type: checkboxTypes.join(", "),
     min_point: minPointNeeded,
     max_point: maxPointNeeded,
@@ -43,9 +43,16 @@ export default function Home() {
 
   const getAwardsData = useCallback(async (value: AwardGetRequestParamTypes) => {
     setLoading(true);
-    const response = await getAwardsService(value);
-    setAwards(response.data.data.data.results);
-    setLoading(false);
+
+    setTimeout(
+      async () => {
+        const response = await getAwardsService(value);
+        setAwards(response.data.data.data.results);
+
+        setLoading(false);
+      },
+      1500,
+    );
   }, [getAwardsService]);
 
   useEffect(() => {
